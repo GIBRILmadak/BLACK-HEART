@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/blkheat logo.png" type="image/png">
+  <title>Témoignages - BLACK HEART</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./images/bkground 01.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .testimonials-container {
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .testimonial {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .testimonial h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .testimonial p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-container button:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .testimonial h3 {
+        font-size: 1.2rem;
+      }
+
+      .testimonial p {
+        font-size: 0.9rem;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      .form-container input,
+      .form-container textarea {
+        font-size: 0.9rem;
+      }
+
+      .form-container button {
+        font-size: 0.9rem;
+        padding: 12px;
+        border-radius: 8px; /* Arrondi plus prononcé */
+        background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+      }
+
+      .form-container button:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Témoignages</h1>
+  <div class="testimonials-container" id="testimonialsContainer">
+    <div class="testimonial">
+      <h3>Utilisateur Anonyme</h3>
+      <p>BLACK HEART m'a aidé à traverser des moments difficiles. Merci pour cet espace sûr et inspirant.</p>
+    </div>
+    <div class="testimonial">
+      <h3>Marie</h3>
+      <p>Partager mon histoire ici m'a permis de me sentir moins seule. Merci à cette communauté incroyable.</p>
+    </div>
+  </div>
+  <div class="form-container">
+    <form id="testimonialForm">
+      <input type="text" placeholder="Votre nom (ou Anonyme)" required>
+      <textarea rows="5" placeholder="Votre témoignage" required></textarea>
+      <button type="submit">Soumettre</button>
+    </form>
+  </div>
+  <script>
+    const API_URL = 'http://localhost:5000/api/testimonials';
+
+    // Charger les témoignages depuis l'API
+    const loadTestimonials = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Erreur lors de la récupération des témoignages');
+        const testimonials = await response.json();
+        testimonialsContainer.innerHTML = ''; // Vider les témoignages existants
+        testimonials.forEach(({ name, message }) => {
+          const testimonial = document.createElement('div');
+          testimonial.className = 'testimonial';
+          testimonial.innerHTML = `
+            <h3>${name}</h3>
+            <p>${message}</p>
+          `;
+          testimonialsContainer.appendChild(testimonial);
+        });
+      } catch (error) {
+        console.error('Erreur lors du chargement des témoignages:', error);
+      }
+    };
+
+    // Soumettre un nouveau témoignage
+    testimonialForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = testimonialForm.querySelector('input').value.trim() || 'Anonyme';
+      const message = testimonialForm.querySelector('textarea').value.trim();
+
+      if (message) {
+        try {
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, message }),
+          });
+
+          if (!response.ok) throw new Error('Erreur lors de l\'envoi du témoignage');
+          testimonialForm.reset();
+          loadTestimonials(); // Recharger les témoignages après soumission
+        } catch (error) {
+          console.error('Erreur lors de l\'envoi du témoignage:', error);
+        }
+      }
+    });
+
+    // Charger les témoignages au chargement de la page
+    window.addEventListener('load', loadTestimonials);
+  </script>
+</body>
+</html>

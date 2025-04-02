@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forum - BLACK HEART</title>
+  <link rel="icon" href="./images/blkheat logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./images/bkground%2002.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .login-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-container h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="file"] {
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+    }
+    .login-form button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .login-form button:hover {
+      background-color: #555;
+    }
+    .hidden {
+      display: none;
+    }
+    .forum-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .posts {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    .post {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .post img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; /* Suppression de la forme de cœur */
+      object-fit: cover;
+    }
+    .post-content {
+      flex: 1;
+    }
+    .post-content .username {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .post-content .message {
+      margin-bottom: 5px;
+    }
+    .post-content .media {
+      display: block;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .post-content .media img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+    }
+    .post.self {
+      background-color: #333;
+      align-self: flex-end;
+    }
+    .post.self .post-content {
+      text-align: right;
+    }
+    .message-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centrer horizontalement */
+      gap: 10px;
+      background-color: #333;
+      padding: 10px;
+      border-radius: 5px;
+      position: fixed; /* Fixer la barre en bas */
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%); /* Centrer horizontalement */
+      width: calc(100% - 40px); /* Ajouter un espace sur les côtés */
+      max-width: 800px;
+      z-index: 1000;
+    }
+    .message-bar input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+    .message-bar input[type="file"] {
+      display: none;
+    }
+    .message-bar label {
+      cursor: pointer;
+      color: white;
+    }
+    .message-bar button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #555;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .image-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+    .image-modal .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .login-container, .forum-container {
+        padding: 15px;
+      }
+      .login-container h1, .title {
+        font-size: 1.5rem;
+      }
+      .login-form input[type="text"], .message-bar input[type="text"] {
+        font-size: 0.9rem;
+      }
+      .login-form button, .message-bar button {
+        font-size: 0.9rem;
+        padding: 10px;
+        border-radius: 8px; /* Arrondi plus prononcé */
+        background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+      }
+      .login-form button:hover, .message-bar button:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+      }
+      .post img {
+        width: 40px;
+        height: 40px;
+      }
+      .post-content .username {
+        font-size: 0.9rem;
+      }
+      .post-content .message {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container hidden" id="loginContainer">
+    <h1>Bienvenue sur le Forum</h1>
+    <form class="login-form" id="loginForm">
+      <input type="text" placeholder="Entrez un pseudonyme" required />
+      <label for="profilePic" style="color: #ccc; font-size: 0.9rem;">Ajoutez une photo de profil (optionnel)</label>
+      <input type="file" id="profilePic" accept="image/*" />
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+
+  <div class="forum-container hidden" id="forumContainer">
+    <h1 class="title">Forum</h1>
+    <div class="posts" id="posts"></div>
+  </div>
+
+  <div class="message-bar" id="messageBar">
+    <input type="text" id="messageInput" placeholder="Tapez un message..." />
+    <label for="fileInput">📎</label>
+    <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
+    <button id="sendButton">Envoyer</button>
+  </div>
+
+  <div class="image-modal" id="imageModal">
+    <span class="close" id="closeModal">&times;</span>
+    <img id="modalImage" src="" alt="Image agrandie">
+  </div>
+
+  <script>
+    const API_URL = 'https://your-render-app-url.onrender.com/api/messages';
+    const UPLOAD_URL = 'https://your-render-app-url.onrender.com/api/upload';
+
+    // Charger les messages depuis l'API
+    const loadMessages = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Failed to fetch messages');
+        const messages = await response.json();
+        postsContainer.innerHTML = ''; // Clear existing posts
+        messages.forEach((message) => {
+          addMessageToDOM(message.username, message.profilePic, message.text, message.fileURL, message.fileType);
+        });
+      } catch (error) {
+        console.error('Error loading messages:', error);
+      }
+    };
+
+    // Envoyer un fichier au serveur
+    const uploadFile = async (file) => {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(UPLOAD_URL, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error('File upload failed');
+        const data = await response.json();
+        return data.fileURL; // URL du fichier stocké sur le serveur
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        throw error;
+      }
+    };
+
+    // Envoyer un message à l'API
+    const sendMessage = async (username, profilePic, text, file, fileType) => {
+      try {
+        let fileURL = null;
+        if (file) {
+          fileURL = await uploadFile(file);
+        }
+
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, profilePic, text, fileURL, fileType }),
+        });
+
+        if (!response.ok) throw new Error('Failed to send message');
+        return response.json();
+      } catch (error) {
+        console.error('Error sending message:', error);
+        throw error;
+      }
+    };
+
+    // Add a message to the DOM
+    const addMessageToDOM = (username, profilePic, text, fileURL, fileType) => {
+      const post = document.createElement('div');
+      post.className = 'post';
+
+      const img = document.createElement('img');
+      img.src = profilePic || './images/default-profile.png';
+
+      const content = document.createElement('div');
+      content.className = 'post-content';
+
+      const userNameElement = document.createElement('div');
+      userNameElement.className = 'username';
+      userNameElement.textContent = username;
+
+      // Assign a random color to the username if not already assigned
+      if (!userColors[username]) {
+        userColors[username] = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+      }
+      userNameElement.style.color = userColors[username];
+
+      const textElement = document.createElement('div');
+      textElement.className = 'message';
+      textElement.textContent = text;
+
+      content.appendChild(userNameElement);
+      content.appendChild(textElement);
+
+      if (fileURL) {
+        let media;
+        if (fileType.startsWith('image/')) {
+          media = document.createElement('img');
+          media.src = fileURL;
+          media.className = 'media';
+          media.addEventListener('click', () => {
+            modalImage.src = fileURL;
+            imageModal.style.display = 'flex';
+          });
+        } else if (fileType.startsWith('video/')) {
+          media = document.createElement('video');
+          media.src = fileURL;
+          media.controls = true;
+          media.className = 'media';
+        } else if (fileType.startsWith('audio/')) {
+          media = document.createElement('audio');
+          media.src = fileURL;
+          media.controls = true;
+        }
+        content.appendChild(media);
+      }
+
+      post.appendChild(img);
+      post.appendChild(content);
+
+      if (username === localStorage.getItem('username')) {
+        post.classList.add('self');
+      }
+
+      postsContainer.appendChild(post);
+    };
+
+    // Check if user is already logged in
+    const username = localStorage.getItem('username');
+    const profilePic = localStorage.getItem('profilePic');
+    if (username) {
+      profilePicURL = profilePic || './images/default-profile.png';
+      loginContainer.classList.add('hidden');
+      forumContainer.classList.remove('hidden');
+      loadMessages(); // Load messages when the user is logged in
+    } else {
+      loginContainer.classList.remove('hidden');
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = loginForm.querySelector('input[type="text"]').value.trim();
+      const profilePic = loginForm.querySelector('#profilePic').files[0];
+      if (profilePic) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          profilePicURL = reader.result;
+          completeLogin(username);
+        };
+        reader.readAsDataURL(profilePic);
+      } else {
+        completeLogin(username);
+      }
+    });
+
+    function completeLogin(username) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('profilePic', profilePicURL);
+      loginContainer.classList.add('hidden');
+      forumContainer.classList.remove('hidden');
+      loadMessages(); // Load messages after login
+    }
+
+    // Vérifier les références JavaScript
+    const messageInput = document.getElementById('messageInput');
+    const fileInput = document.getElementById('fileInput');
+    const sendButton = document.getElementById('sendButton');
+    const postsContainer = document.getElementById('posts');
+
+    if (!messageInput || !fileInput || !sendButton || !postsContainer) {
+      console.error('One or more DOM elements are missing');
+    } else {
+      sendButton.addEventListener('click', async () => {
+        const message = messageInput.value.trim();
+        const file = fileInput.files[0];
+        const fileType = file ? file.type : null;
+
+        if (message || file) {
+          try {
+            const newMessage = await sendMessage(localStorage.getItem('username'), profilePicURL, message, file, fileType);
+            addMessageToDOM(newMessage.username, newMessage.profilePic, newMessage.text, newMessage.fileURL, newMessage.fileType);
+
+            messageInput.value = '';
+            fileInput.value = '';
+          } catch (error) {
+            console.error('Error sending message:', error);
+          }
+        }
+      });
+    }
+
+    closeModal.addEventListener('click', () => {
+      imageModal.style.display = 'none';
+    });
+
+    // Charger les messages au chargement de la page
+    window.addEventListener('load', loadMessages);
+  </script>
+</body>
+</html>

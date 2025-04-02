@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOPE - BLACK HEART</title>
+  <link rel="icon" href="./images/blkheat logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./images/bkground 04.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section {
+      margin-bottom: 30px;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .quotes {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .images img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .resources a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 10px 0;
+      padding: 10px;
+      border: 2px solid white;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .resources a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-container button:hover {
+      background-color: #555;
+    }
+
+    .messages-container {
+      margin-top: 30px;
+      max-width: 800px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .message {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #444;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+
+      .quotes {
+        font-size: 1rem;
+      }
+
+      .images img {
+        width: 150px;
+      }
+
+      .resources a {
+        font-size: 1rem;
+        padding: 8px;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      .form-container input,
+      .form-container textarea {
+        font-size: 0.9rem;
+      }
+
+      .form-container button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>HOPE</h1>
+
+  <div class="section">
+    <h2>Citations Inspirantes</h2>
+    <div class="quotes">
+      <p>"L'espoir est la chose avec des plumes qui se perche dans l'âme."</p>
+      <p>"Même dans les moments les plus sombres, une petite lumière peut briller."</p>
+      <p>"Chaque jour est une nouvelle opportunité de recommencer."</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Images Apaisantes</h2>
+    <div class="images">
+      <img src="./images/bkground 01.jpg" alt="Nature 1">
+      <img src="./images/bkground 06.jpg" alt="Nature 2">
+      <img src="./images/bkground 03.jpg" alt="Nature 3">
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ressources</h2>
+    <div class="resources">
+      <a href="https://www.psychologies.com/" target="_blank">Psychologies</a>
+      <a href="https://www.youtube.com/watch?v=2Lz0VOltZKA" target="_blank">Vidéo : Comment surmonter les moments difficiles</a>
+      <a href="https://www.goodreads.com/" target="_blank">Goodreads - Livres inspirants</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Partagez Votre Espoir</h2>
+    <div class="form-container">
+      <form id="hopeForm">
+        <input type="text" placeholder="Votre nom (ou Anonyme)" required>
+        <textarea rows="5" placeholder="Votre message d'espoir" required></textarea>
+        <button type="submit">Soumettre</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="messages-container" id="messagesContainer">
+    <h2>Messages d'Espoir Partagés</h2>
+    <!-- Les messages soumis s'afficheront ici -->
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api/hope-messages';
+    const hopeForm = document.getElementById('hopeForm');
+    const messagesContainer = document.getElementById('messagesContainer');
+
+    // Charger les messages depuis l'API
+    const loadMessages = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Erreur lors de la récupération des messages');
+        const messages = await response.json();
+        messagesContainer.innerHTML = ''; // Vider les messages existants
+        messages.forEach(({ name, message }) => {
+          const messageElement = document.createElement('div');
+          messageElement.className = 'message';
+          messageElement.innerHTML = `<strong>${name}:</strong> ${message}`;
+          messagesContainer.appendChild(messageElement);
+        });
+      } catch (error) {
+        console.error('Erreur lors du chargement des messages:', error);
+      }
+    };
+
+    // Soumettre un nouveau message
+    hopeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = hopeForm.querySelector('input').value.trim() || 'Anonyme';
+      const message = hopeForm.querySelector('textarea').value.trim();
+
+      if (message) {
+        try {
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, message }),
+          });
+
+          if (!response.ok) throw new Error('Erreur lors de l\'envoi du message');
+          hopeForm.reset();
+          loadMessages(); // Recharger les messages après soumission
+        } catch (error) {
+          console.error('Erreur lors de l\'envoi du message:', error);
+        }
+      }
+    });
+
+    // Charger les messages au chargement de la page
+    window.addEventListener('load', loadMessages);
+  </script>
+</body>
+</html>

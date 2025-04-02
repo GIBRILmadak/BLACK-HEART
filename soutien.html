@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/blkheat logo.png" type="image/png">
+  <title>Soutien - BLACK HEART</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./images/bkground 01.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .link {
+      display: block;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 15px;
+      border: 2px solid white;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .link:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .link {
+        font-size: 1rem;
+        padding: 12px;
+        border-radius: 8px; /* Arrondi plus prononcé */
+        background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+      }
+
+      .link:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Besoin de Soutien ?</h1>
+  <div class="links-container">
+    <h2 class="section-title">Sites de Soutien Émotionnel</h2>
+    <a href="https://www.soshelpline.org/" target="_blank" class="link">SOS Helpline</a>
+    <a href="https://www.samaritans.org/" target="_blank" class="link">Samaritans</a>
+    <a href="https://www.befrienders.org/" target="_blank" class="link">Befrienders Worldwide</a>
+
+    <h2 class="section-title">Forums et Communautés</h2>
+    <a href="https://discord.com/invite/mentalhealth" target="_blank" class="link">Discord - Mental Health</a>
+    <a href="https://7cups.com/" target="_blank" class="link">7 Cups</a>
+    <a href="https://www.reddit.com/r/depression/" target="_blank" class="link">Reddit - r/depression</a>
+
+    <h2 class="section-title">Vidéos Inspirantes</h2>
+    <a href="https://www.youtube.com/watch?v=2Lz0VOltZKA" target="_blank" class="link">Vidéo : Comment surmonter les moments difficiles</a>
+    <a href="https://www.youtube.com/watch?v=mgmVOuLgFB0" target="_blank" class="link">Vidéo : Motivation pour un nouveau départ</a>
+    <a href="https://www.youtube.com/watch?v=ZXsQAXx_ao0" target="_blank" class="link">Vidéo : Ne jamais abandonner</a>
+  </div>
+</body>
+</html>

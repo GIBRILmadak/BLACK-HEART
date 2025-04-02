@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - BLACK HEART</title>
+  <link rel="icon" href="./images/blkheat logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('./images/bkground 06.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-container button:hover {
+      background-color: #555;
+    }
+
+    .contact-info {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      .form-container input,
+      .form-container textarea {
+        font-size: 0.9rem;
+      }
+
+      .form-container button {
+        font-size: 0.9rem;
+        padding: 12px;
+        border-radius: 8px; /* Arrondi plus prononcé */
+        background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+      }
+
+      .form-container button:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+      }
+
+      .contact-info a {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Contactez-nous</h1>
+  <div class="form-container">
+    <form>
+      <input type="text" placeholder="Votre nom" required>
+      <input type="email" placeholder="Votre email" required>
+      <textarea rows="5" placeholder="Votre message" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+  <div class="contact-info">
+    <p>Vous pouvez également nous contacter via :</p>
+    <a href="mailto:support@blackheart.com">support@blackheart.com</a>
+    <a href="https://twitter.com/blackheart" target="_blank">Twitter</a>
+    <a href="https://facebook.com/blackheart" target="_blank">Facebook</a>
+    <a href="https://instagram.com/blackheart" target="_blank">Instagram</a>
+  </div>
+</body>
+</html>

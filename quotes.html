@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A collection of inspirational quotes to motivate and inspire.">
+  <title>Quotes</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('./images/bkground 05.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    main {
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      position: relative;
+      height: 50%;
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .quote {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      font-family: 'Georgia', serif; /* Changement de la police */
+    }
+
+    .quote.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @keyframes fade {
+      0%, 100% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #quotes-container {
+      text-align: center;
+      font-size: 1.5em;
+      margin: 20px auto;
+      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+
+    @media (max-width: 600px) {
+      /* Ajout d'un style pour les boutons si nécessaire */
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div id="quotes-container">
+      <div class="quote">"La vie est belle."</div>
+      <div class="quote">"Le succès est la somme de petits efforts répétés jour après jour."</div>
+      <div class="quote">"Croyez en vous et tout est possible."</div>
+      <div class="quote">"The only limit to our realization of tomorrow is our doubts of today."</div>
+      <div class="quote">"In the middle of every difficulty lies opportunity."</div>
+      <div class="quote">"Success is not final, failure is not fatal: It is the courage to continue that counts."</div>
+      <div class="quote">"Do not wait to strike till the iron is hot; but make it hot by striking."</div>
+      <div class="quote">"What lies behind us and what lies before us are tiny matters compared to what lies within us."</div>
+      <div class="quote">"The best way to predict the future is to create it."</div>
+      <div class="quote">"It does not matter how slowly you go as long as you do not stop."</div>
+      <div class="quote">"Believe you can and you're halfway there."</div>
+      <div class="quote">"Act as if what you do makes a difference. It does."</div>
+      <div class="quote">"You are never too old to set another goal or to dream a new dream."</div>
+      <div class="quote">"Sometimes, the smallest step in the right direction ends up being the biggest step of your life."</div>
+      <div class="quote">"Keep your face always toward the sunshine—and shadows will fall behind you."</div>
+      <div class="quote">"Hardships often prepare ordinary people for an extraordinary destiny."</div>
+      <div class="quote">"You are braver than you believe, stronger than you seem, and smarter than you think."</div>
+      <div class="quote">"No matter how hard the past is, you can always begin again."</div>
+      <div class="quote">"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle."</div>
+      <div class="quote">"Your present circumstances don't determine where you can go; they merely determine where you start."</div>
+      <div class="quote">"It's not whether you get knocked down, it's whether you get up."</div>
+      <div class="quote">"You are enough just as you are."</div>
+      <div class="quote">"Le bonheur n'est pas quelque chose de prêt à l'emploi. Il vient de vos propres actions."</div>
+      <div class="quote">"La plus grande gloire n'est pas de ne jamais tomber, mais de se relever à chaque chute."</div>
+      <div class="quote">"Faites de votre vie un rêve, et d'un rêve, une réalité."</div>
+      <div class="quote">"Il n'y a qu'une façon d'échouer, c'est d'abandonner avant d'avoir réussi."</div>
+      <div class="quote">"La vie est un défi à relever, un bonheur à mériter, une aventure à tenter."</div>
+      <div class="quote">"Rien n'est impossible, seules les limites de notre esprit définissent certaines choses comme inconcevables."</div>
+      <div class="quote">"L'échec est simplement l'opportunité de recommencer, cette fois plus intelligemment."</div>
+      <div class="quote">"La persévérance est la clé du succès."</div>
+      <div class="quote">"Chaque jour est une nouvelle chance de faire mieux."</div>
+      <div class="quote">"Croyez en vos rêves et ils se réaliseront peut-être. Croyez en vous et ils se réaliseront sûrement."</div>
+      <div class="quote">"Le courage n'est pas l'absence de peur, mais la capacité de vaincre ce qui fait peur."</div>
+      <div class="quote">"La vie est trop courte pour la passer à regretter tout ce que vous n'avez pas eu le courage de tenter."</div>
+      <div class="quote">"Le succès est la capacité d'aller d'échec en échec sans perdre son enthousiasme."</div>
+      <div class="quote">"Ne rêvez pas votre vie, vivez vos rêves."</div>
+      <div class="quote">"La seule limite à notre épanouissement de demain sera nos doutes d'aujourd'hui."</div>
+    </div>
+  </main>
+  <script>
+    const quotes = document.querySelectorAll('#quotes-container .quote');
+    let currentIndex = -1;
+
+    function showRandomQuote() {
+      if (currentIndex !== -1) {
+        quotes[currentIndex].classList.remove('active');
+      }
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * quotes.length);
+      } while (nextIndex === currentIndex);
+      currentIndex = nextIndex;
+      quotes[currentIndex].classList.add('active');
+    }
+
+    // Initialisation
+    showRandomQuote();
+
+    // Défilement toutes les 5 secondes
+    setInterval(showRandomQuote, 5000);
+  </script>
+</body>
+</html>
