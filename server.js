@@ -1,3 +1,4 @@
+
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
@@ -15,6 +16,14 @@ app.use(cors({
   methods: ['GET', 'POST'], // Autoriser uniquement les méthodes GET et POST
   allowedHeaders: ['Content-Type'] // Autoriser uniquement les en-têtes nécessaires
 }));
+
+// Middleware pour valider les données envoyées via des formulaires ou des appels API
+app.use((req, res, next) => {
+  if (req.method === 'POST' && (!req.is('application/json') && !req.is('multipart/form-data'))) {
+    return res.status(400).json({ error: 'Les données doivent être envoyées au format JSON ou via un formulaire.' });
+  }
+  next();
+});
 
 // Vérifier ou créer le fichier de base de données
 const dbFile = './blackheart.db';
@@ -120,6 +129,9 @@ app.post('/api/messages', (req, res) => {
     return res.status(400).json({ error: 'Les champs "username" et "text" sont obligatoires.' });
   }
 
+  // Tester si les données sont correctement reçues
+  console.log('Données reçues pour /api/messages:', req.body);
+
   const query = `
     INSERT INTO messages (username, profilePic, text, fileURL, fileType)
     VALUES (?, ?, ?, ?, ?)
@@ -162,6 +174,9 @@ app.post('/api/testimonials', (req, res) => {
     return res.status(400).json({ error: 'Les champs "name" et "message" sont obligatoires.' });
   }
 
+  // Tester si les données sont correctement reçues
+  console.log('Données reçues pour /api/testimonials:', req.body);
+
   const query = `
     INSERT INTO testimonials (name, message)
     VALUES (?, ?)
@@ -201,6 +216,9 @@ app.post('/api/hope-messages', (req, res) => {
     return res.status(400).json({ error: 'Les champs "name" et "message" sont obligatoires.' });
   }
 
+  // Tester si les données sont correctement reçues
+  console.log('Données reçues pour /api/hope-messages:', req.body);
+
   const query = `
     INSERT INTO hope_messages (name, message)
     VALUES (?, ?)
@@ -237,4 +255,5 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`);
 });
+
 
