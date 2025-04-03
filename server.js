@@ -220,7 +220,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'Aucun fichier téléchargé.' });
   }
-  const fileURL = `https://your-render-app-url.onrender.com/uploads/${req.file.filename}`;
+  const fileURL = `https://black-heart.onrender.com/uploads/${req.file.filename}`;
   res.status(200).json({ fileURL });
 });
 
