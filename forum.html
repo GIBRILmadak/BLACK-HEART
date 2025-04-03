@@ -477,6 +477,14 @@
           }
         }
       });
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
+          alert('Le fichier est trop volumineux. La taille maximale autorisée est de 5 Mo.');
+          fileInput.value = ''; // Clear the file input
+        }
+      });
     }
 
     closeModal.addEventListener('click', () => {
