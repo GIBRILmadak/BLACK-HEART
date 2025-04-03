@@ -8,7 +8,13 @@ const fs = require('fs');
 // Initialiser l'application Express
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Configurer CORS pour autoriser toutes les origines
+app.use(cors({
+  origin: '*', // Autoriser toutes les origines
+  methods: ['GET', 'POST'], // Autoriser uniquement les méthodes GET et POST
+  allowedHeaders: ['Content-Type'] // Autoriser uniquement les en-têtes nécessaires
+}));
 
 // Vérifier ou créer le fichier de base de données
 const dbFile = './blackheart.db';
@@ -42,7 +48,37 @@ const db = new sqlite3.Database(dbFile, (err) => {
       )
     `, (err) => {
       if (err) {
-        console.error('Erreur lors de la création de la table:', err.message);
+        console.error('Erreur lors de la création de la table messages:', err.message);
+      } else {
+        console.log('Table messages vérifiée ou créée avec succès.');
+      }
+    });
+
+    // Créer une table pour les témoignages
+    db.run(`
+      CREATE TABLE IF NOT EXISTS testimonials (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        message TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `, (err) => {
+      if (err) {
+        console.error('Erreur lors de la création de la table testimonials:', err.message);
+      }
+    });
+
+    // Créer une table pour les messages d'espoir
+    db.run(`
+      CREATE TABLE IF NOT EXISTS hope_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        message TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `, (err) => {
+      if (err) {
+        console.error('Erreur lors de la création de la table hope_messages:', err.message);
       }
     });
   }
@@ -76,7 +112,7 @@ app.post('/api/messages', (req, res) => {
   const { username, profilePic, text, fileURL, fileType } = req.body;
 
   if (!username || !text) {
-    return res.status(400).json({ error: 'Le champ "username" et "text" sont obligatoires.' });
+    return res.status(400).json({ error: 'Les champs "username" et "text" sont obligatoires.' });
   }
 
   const query = `
@@ -101,6 +137,84 @@ app.post('/api/messages', (req, res) => {
   });
 });
 
+// Obtenir tous les témoignages
+app.get('/api/testimonials', (req, res) => {
+  db.all('SELECT * FROM testimonials ORDER BY timestamp DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des témoignages:', err.message);
+      res.status(500).json({ error: 'Erreur interne du serveur' });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Ajouter un nouveau témoignage
+app.post('/api/testimonials', (req, res) => {
+  const { name, message } = req.body;
+
+  if (!name || !message) {
+    return res.status(400).json({ error: 'Les champs "name" et "message" sont obligatoires.' });
+  }
+
+  const query = `
+    INSERT INTO testimonials (name, message)
+    VALUES (?, ?)
+  `;
+  db.run(query, [name, message], function (err) {
+    if (err) {
+      console.error('Erreur lors de l\'ajout du témoignage:', err.message);
+      res.status(500).json({ error: 'Erreur interne du serveur' });
+    } else {
+      res.status(201).json({
+        id: this.lastID,
+        name,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  });
+});
+
+// Obtenir tous les messages d'espoir
+app.get('/api/hope-messages', (req, res) => {
+  db.all('SELECT * FROM hope_messages ORDER BY timestamp DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des messages d\'espoir:', err.message);
+      res.status(500).json({ error: 'Erreur interne du serveur' });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Ajouter un nouveau message d'espoir
+app.post('/api/hope-messages', (req, res) => {
+  const { name, message } = req.body;
+
+  if (!name || !message) {
+    return res.status(400).json({ error: 'Les champs "name" et "message" sont obligatoires.' });
+  }
+
+  const query = `
+    INSERT INTO hope_messages (name, message)
+    VALUES (?, ?)
+  `;
+  db.run(query, [name, message], function (err) {
+    if (err) {
+      console.error('Erreur lors de l\'ajout du message d\'espoir:', err.message);
+      res.status(500).json({ error: 'Erreur interne du serveur' });
+    } else {
+      res.status(201).json({
+        id: this.lastID,
+        name,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  });
+});
+
 // Route pour télécharger un fichier
 app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
@@ -118,3 +232,4 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`);
 });
+
