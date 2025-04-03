@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -216,6 +217,44 @@
         font-size: 0.8rem;
       }
     }
+    @media (max-width: 768px) {
+      .login-container, .forum-container {
+        padding: 20px;
+      }
+      .login-container h1, .title {
+        font-size: 1.8rem;
+      }
+      .message-bar input[type="text"] {
+        font-size: 1rem;
+      }
+      .message-bar button {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .login-container, .forum-container {
+        padding: 15px;
+      }
+      .login-container h1, .title {
+        font-size: 1.5rem;
+      }
+      .message-bar input[type="text"] {
+        font-size: 0.9rem;
+      }
+      .message-bar button {
+        font-size: 0.9rem;
+      }
+      .post img {
+        width: 35px;
+        height: 35px;
+      }
+      .post-content .username {
+        font-size: 0.8rem;
+      }
+      .post-content .message {
+        font-size: 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -247,8 +286,8 @@
   </div>
 
   <script>
-    const API_URL = 'https://your-render-app-url.onrender.com/api/messages';
-    const UPLOAD_URL = 'https://your-render-app-url.onrender.com/api/upload';
+    const API_URL = 'https://black-heart.onrender.com/api/messages';
+    const UPLOAD_URL = 'https://black-heart.onrender.com/api/upload';
 
     // Charger les messages depuis l'API
     const loadMessages = async () => {
@@ -414,13 +453,21 @@
       console.error('One or more DOM elements are missing');
     } else {
       sendButton.addEventListener('click', async () => {
+        const username = localStorage.getItem('username');
+        const profilePicURL = localStorage.getItem('profilePic');
+
+        if (!username) {
+          alert('Veuillez vous connecter avant d\'envoyer un message.');
+          return;
+        }
+
         const message = messageInput.value.trim();
         const file = fileInput.files[0];
         const fileType = file ? file.type : null;
 
         if (message || file) {
           try {
-            const newMessage = await sendMessage(localStorage.getItem('username'), profilePicURL, message, file, fileType);
+            const newMessage = await sendMessage(username, profilePicURL, message, file, fileType);
             addMessageToDOM(newMessage.username, newMessage.profilePic, newMessage.text, newMessage.fileURL, newMessage.fileType);
 
             messageInput.value = '';
