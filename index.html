@@ -62,17 +62,16 @@
     }
 
     .links {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: static; /* Supprime la position absolue */
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap; /* Permet aux liens de passer à la ligne */
+      justify-content: center; /* Centre les liens horizontalement */
+      gap: 10px; /* Ajoute un espacement entre les liens */
+      margin-top: 20px; /* Ajoute un espacement au-dessus des liens */
     }
 
     .links a {
-      color: #f0f0f0;
-      text-decoration: none;
+      color: black; /* Texte des boutons en noir */
       font-size: 1.2rem;
       padding: 10px 20px;
       border: 2px solid #f0f0f0;
@@ -115,15 +114,57 @@
         font-size: 1rem;
         margin-top: 10px;
       }
+      .links {
+        flex-direction: column; /* Affiche les liens en colonne */
+        align-items: center; /* Centre les liens dans la colonne */
+      }
       .links a {
-        font-size: 0.9rem;
-        padding: 10px;
-        border-radius: 8px; /* Arrondi plus prononcé */
+        width: 100%; /* Les liens prennent toute la largeur */
+        text-align: center; /* Centre le texte des liens */
+        font-size: 0.8rem; /* Réduction de la taille du texte */
+        padding: 8px 15px; /* Réduction de la taille des boutons */
+        border-radius: 5px;
         background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
       }
 
       .links a:hover {
         background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 2.5rem;
+      }
+      .subtitle {
+        font-size: 1.3rem;
+      }
+      .message {
+        font-size: 1rem;
+      }
+      .links a {
+        font-size: 1rem;
+        padding: 8px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 2rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+      .message {
+        font-size: 0.9rem;
+      }
+      .links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .links a {
+        font-size: 0.9rem;
+        padding: 10px;
       }
     }
   </style>
