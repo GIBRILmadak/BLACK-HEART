@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware pour analyser les données JSON
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' })); // Increase JSON request size limit
 
 // Configurer CORS pour autoriser toutes les origines
 app.use(cors());
@@ -100,7 +100,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+});
 
 // Routes API
 // Route par défaut pour la racine
