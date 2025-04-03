@@ -95,6 +95,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Routes API
+// Route par défaut pour la racine
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur le serveur Black Heart API!');
+});
+
 // Obtenir tous les messages
 app.get('/api/messages', (req, res) => {
   db.all('SELECT * FROM messages ORDER BY timestamp ASC', [], (err, rows) => {
