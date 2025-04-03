@@ -122,6 +122,44 @@
         background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
       }
     }
+
+    @media (max-width: 768px) {
+      .testimonial h3 {
+        font-size: 1.3rem;
+      }
+      .testimonial p {
+        font-size: 1rem;
+      }
+      .form-container {
+        padding: 25px;
+      }
+      .form-container input,
+      .form-container textarea {
+        font-size: 1rem;
+      }
+      .form-container button {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .testimonial h3 {
+        font-size: 1.1rem;
+      }
+      .testimonial p {
+        font-size: 0.9rem;
+      }
+      .form-container {
+        padding: 15px;
+      }
+      .form-container input,
+      .form-container textarea {
+        font-size: 0.9rem;
+      }
+      .form-container button {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -144,7 +182,7 @@
     </form>
   </div>
   <script>
-    const API_URL = 'http://localhost:5000/api/testimonials';
+    const API_URL = 'https://black-heart.onrender.com/api/testimonials';
 
     // Charger les témoignages depuis l'API
     const loadTestimonials = async () => {
@@ -195,3 +233,4 @@
   </script>
 </body>
 </html>
+
