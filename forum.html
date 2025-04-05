@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +20,7 @@
       height: 100vh;
     }
     .login-container {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(10, 125, 62, 0.9);  /* Vert avec transparence */
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -69,7 +68,8 @@
       justify-content: space-between;
       max-width: 800px;
       margin: 0 auto;
-      background-color: rgba(0, 0, 0, 0.8);
+      margin-top: 80px; /* Pour éviter que le contenu soit caché derrière le titre */
+      background-color: rgba(10, 125, 62, 0.9); /* Vert avec transparence */
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -83,7 +83,7 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      background-color: #1e1e1e;
+      background-color: rgba(8, 108, 53, 0.9); /* Vert plus foncé */
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 10px;
@@ -127,7 +127,7 @@
       align-items: center;
       justify-content: center; /* Centrer horizontalement */
       gap: 10px;
-      background-color: #333;
+      background-color: #0a7d3e;
       padding: 10px;
       border-radius: 5px;
       position: fixed; /* Fixer la barre en bas */
@@ -155,11 +155,14 @@
     .message-bar button {
       padding: 10px;
       font-size: 1rem;
-      background-color: #555;
+      background-color: #086c35;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+    .message-bar button:hover {
+      background-color: #065028;
     }
     .image-modal {
       position: fixed;
@@ -187,6 +190,21 @@
       color: white;
       cursor: pointer;
     }
+    .page-title {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0a7d3e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
     @media (max-width: 600px) {
       .login-container, .forum-container {
         padding: 15px;
@@ -197,6 +215,30 @@
       .login-form input[type="text"], .message-bar input[type="text"] {
         font-size: 0.9rem;
       }
+      /* Thème clair */
+body.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+body.light .login-container,
+body.light .forum-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+body.light .message-bar {
+  background-color: #ddd;
+}
+
+body.light button {
+  background-color: #333;
+  color: white;
+}
+
+body.light button:hover {
+  background-color: #555;
+}
       .login-form button, .message-bar button {
         font-size: 0.9rem;
         padding: 10px;
@@ -255,9 +297,119 @@
         font-size: 0.8rem;
       }
     }
+
+    /* Style des notifications */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0a7d3e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInOut 3s ease;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    /* Style de la barre de navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #0a7d3e;
+}
+
+    button, input[type="text"], input[type="file"] {
+      transition: all 0.3s ease;
+    }
+    
+    button:hover {
+      transform: scale(1.05);
+      background-color: #0c5d2a; /* Couleur légèrement plus foncée */
+    }
+    
+    .hidden {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+    
+    .hidden.show {
+      opacity: 1;
+      transform: translateY(0);
+    }    
+
+    /* Suppression des styles du footer */
+    .footer,
+    .social-links,
+    .social-links img {
+      display: none;
+    }
+    
+    .message-bar .mic-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .message-bar .mic-button.recording {
+      color: #ff0000;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body>
+  <div class="page-title">FORUM</div>
   <div class="login-container hidden" id="loginContainer">
     <h1>Bienvenue sur le Forum</h1>
     <form class="login-form" id="loginForm">
@@ -266,6 +418,10 @@
       <input type="file" id="profilePic" accept="image/*" />
       <button type="submit">Se connecter</button>
     </form>
+  </div>
+  <!-- Ajoutez un bouton pour changer de thème -->
+  <div class="theme-toggle">
+   <button id="toggleTheme">🌙 Mode Sombre</button>
   </div>
 
   <div class="forum-container hidden" id="forumContainer">
@@ -277,6 +433,7 @@
     <input type="text" id="messageInput" placeholder="Tapez un message..." />
     <label for="fileInput">📎</label>
     <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
+    <button class="mic-button" id="micButton">🎤</button>
     <button id="sendButton">Envoyer</button>
   </div>
 
@@ -284,12 +441,19 @@
     <span class="close" id="closeModal">&times;</span>
     <img id="modalImage" src="" alt="Image agrandie">
   </div>
+  <nav class="navbar">
+    <div class="logo">BLACK HEART</div>
+    <ul>
+      <li><a href="#forum">Forum</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
   <script>
     const API_URL = 'https://black-heart.onrender.com/api/messages';
     const UPLOAD_URL = 'https://black-heart.onrender.com/api/upload';
 
-    // Charger les messages depuis l'API
     const loadMessages = async () => {
       try {
         const response = await fetch(API_URL);
@@ -303,6 +467,21 @@
         console.error('Error loading messages:', error);
       }
     };
+
+    // Exemple de notification
+const notifyNewMessage = (message) => {
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.textContent = `Nouveau message de ${message.username}`;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+};
+
+// Appelez cette fonction lorsqu'un nouveau message est reçu
+notifyNewMessage({ username: 'JohnDoe' });
 
     // Envoyer un fichier au serveur
     const uploadFile = async (file) => {
@@ -323,6 +502,13 @@
         throw error;
       }
     };
+
+    // Définition des variables manquantes
+    const userColors = {};
+    const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
+    
+    // Correction de la variable profilePicURL
+    let profilePicURL = '';
 
     // Envoyer un message à l'API
     const sendMessage = async (username, profilePic, text, file, fileType) => {
@@ -345,67 +531,100 @@
         throw error;
       }
     };
+    // JavaScript pour basculer entre les thèmes
+const toggleThemeButton = document.getElementById('toggleTheme');
+toggleThemeButton.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  toggleThemeButton.textContent = document.body.classList.contains('light') ? '🌙 Mode Sombre' : '☀️ Mode Clair';
+});
+// Générer un avatar par défaut avec une couleur aléatoire
+const generateAvatar = (username) => {
+    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const initials = username.substring(0, 2).toUpperCase();
+    return `https://ui-avatars.com/api/?name=${initials}&background=${color.slice(1)}&color=fff`;
+};
 
-    // Add a message to the DOM
-    const addMessageToDOM = (username, profilePic, text, fileURL, fileType) => {
-      const post = document.createElement('div');
-      post.className = 'post';
+// Fonction corrigée pour ajouter un message au DOM
+const addMessageToDOM = (username, profilePic, text, fileURL, fileType) => {
+    const postsContainer = document.getElementById('posts');
+    if (!postsContainer) return;
 
-      const img = document.createElement('img');
-      img.src = profilePic || './images/default-profile.png';
+    const post = document.createElement('div');
+    post.className = 'post';
 
-      const content = document.createElement('div');
-      content.className = 'post-content';
-
-      const userNameElement = document.createElement('div');
-      userNameElement.className = 'username';
-      userNameElement.textContent = username;
-
-      // Assign a random color to the username if not already assigned
-      if (!userColors[username]) {
-        userColors[username] = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
-      }
-      userNameElement.style.color = userColors[username];
-
-      const textElement = document.createElement('div');
-      textElement.className = 'message';
-      textElement.textContent = text;
-
-      content.appendChild(userNameElement);
-      content.appendChild(textElement);
-
-      if (fileURL) {
-        let media;
-        if (fileType.startsWith('image/')) {
-          media = document.createElement('img');
-          media.src = fileURL;
-          media.className = 'media';
-          media.addEventListener('click', () => {
-            modalImage.src = fileURL;
-            imageModal.style.display = 'flex';
-          });
-        } else if (fileType.startsWith('video/')) {
-          media = document.createElement('video');
-          media.src = fileURL;
-          media.controls = true;
-          media.className = 'media';
-        } else if (fileType.startsWith('audio/')) {
-          media = document.createElement('audio');
-          media.src = fileURL;
-          media.controls = true;
-        }
-        content.appendChild(media);
-      }
-
-      post.appendChild(img);
-      post.appendChild(content);
-
-      if (username === localStorage.getItem('username')) {
-        post.classList.add('self');
-      }
-
-      postsContainer.appendChild(post);
+    const img = document.createElement('img');
+    img.src = profilePic || generateAvatar(username);
+    img.onerror = () => {
+        img.src = generateAvatar(username);
     };
+
+    const content = document.createElement('div');
+    content.className = 'post-content';
+
+    const userNameElement = document.createElement('div');
+    userNameElement.className = 'username';
+    userNameElement.textContent = username;
+
+    if (!userColors[username]) {
+        userColors[username] = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+    }
+    userNameElement.style.color = userColors[username];
+
+    const textElement = document.createElement('div');
+    textElement.className = 'message';
+    textElement.textContent = text;
+
+    content.appendChild(userNameElement);
+    content.appendChild(textElement);
+
+    if (fileURL && fileType) {
+        const mediaContainer = document.createElement('div');
+        mediaContainer.className = 'media-container';
+        
+        try {
+            let media;
+            if (fileType.startsWith('image/')) {
+                media = document.createElement('img');
+                media.addEventListener('click', () => {
+                    const modalImage = document.getElementById('modalImage');
+                    const imageModal = document.getElementById('imageModal');
+                    if (modalImage && imageModal) {
+                        modalImage.src = fileURL;
+                        imageModal.style.display = 'flex';
+                    }
+                });
+            } else if (fileType.startsWith('video/')) {
+                media = document.createElement('video');
+                media.controls = true;
+            } else if (fileType.startsWith('audio/')) {
+                media = document.createElement('audio');
+                media.controls = true;
+            }
+
+            if (media) {
+                media.src = fileURL;
+                media.className = 'media';
+                media.loading = 'lazy';
+                mediaContainer.appendChild(media);
+                content.appendChild(mediaContainer);
+            }
+        } catch (error) {
+            console.error('Error creating media element:', error);
+        }
+    }
+
+    post.appendChild(img);
+    post.appendChild(content);
+
+    const currentUsername = localStorage.getItem('username');
+    if (username === currentUsername) {
+        post.classList.add('self');
+    }
+
+    postsContainer.appendChild(post);
+    post.scrollIntoView({ behavior: 'smooth' });
+};
 
     // Check if user is already logged in
     const username = localStorage.getItem('username');
@@ -493,6 +712,80 @@
 
     // Charger les messages au chargement de la page
     window.addEventListener('load', loadMessages);
+
+    // Ajout de la logique d'enregistrement audio
+    const initAudioRecording = () => {
+      const micButton = document.getElementById('micButton');
+      if (!micButton) return;
+
+      let mediaRecorder;
+      let audioChunks = [];
+      const MAX_RECORDING_TIME = 300000; // 5 minutes en millisecondes
+      let recordingTimeout;
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          micButton.addEventListener('click', async () => {
+              try {
+                  if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+                      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                      mediaRecorder = new MediaRecorder(stream);
+                      audioChunks = [];
+
+                      mediaRecorder.addEventListener('dataavailable', event => {
+                          audioChunks.push(event.data);
+                      });
+
+                      mediaRecorder.addEventListener('stop', async () => {
+                          clearTimeout(recordingTimeout);
+                          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                          
+                          if (audioBlob.size > 0) {
+                              const username = localStorage.getItem('username');
+                              const profilePicURL = localStorage.getItem('profilePic');
+                              
+                              try {
+                                  const newMessage = await sendMessage(username, profilePicURL, "", audioBlob, 'audio/webm');
+                                  addMessageToDOM(newMessage.username, newMessage.profilePic, "", newMessage.fileURL, 'audio/webm');
+                              } catch (error) {
+                                  console.error('Error sending audio message:', error);
+                              }
+                          }
+                          
+                          audioChunks = [];
+                          micButton.classList.remove('recording');
+                          micButton.textContent = '🎤';
+                          stream.getTracks().forEach(track => track.stop());
+                      });
+
+                      mediaRecorder.start();
+                      micButton.classList.add('recording');
+                      micButton.textContent = '⏹️';
+
+                      // Arrêt automatique après MAX_RECORDING_TIME
+                      recordingTimeout = setTimeout(() => {
+                          if (mediaRecorder && mediaRecorder.state === 'recording') {
+                              mediaRecorder.stop();
+                          }
+                      }, MAX_RECORDING_TIME);
+                  } else {
+                      mediaRecorder.stop();
+                  }
+              } catch (error) {
+                  console.error('Error accessing microphone:', error);
+                  alert('Impossible d\'accéder au microphone. Veuillez vérifier les permissions.');
+              }
+          });
+      } else {
+          micButton.style.display = 'none';
+          console.warn('Audio recording is not supported in this browser');
+      }
+  };
+
+  // Initialiser l'enregistrement audio au chargement
+  window.addEventListener('load', () => {
+      loadMessages();
+      initAudioRecording();
+  });
   </script>
 </body>
 </html>
