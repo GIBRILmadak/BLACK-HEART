@@ -28,12 +28,13 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
-      min-height: 100vh; 
+      padding: 5px; /* Further reduced padding */
+      min-height: 85vh; /* Adjusted height */
+      position: relative; 
     }
 
     .logo {
-      margin-bottom: 20px;
+      margin-bottom: 5px; /* Further reduced margin */
     }
 
     .logo img {
@@ -44,7 +45,7 @@
     .subtitle {
       font-size: 1.5rem;
       font-style: italic;
-      margin-bottom: 10px;
+      margin-bottom: 3px; /* Further reduced margin */
     }
 
     .main-title {
@@ -55,7 +56,7 @@
 
     .message {
       font-size: 1.2rem;
-      margin-top: 15px;
+      margin-top: 5px; /* Further reduced margin */
       text-align: center;
       font-style: italic;
       color: #f0f0f0;
@@ -65,9 +66,9 @@
       display: flex;
       justify-content: space-between; /* Place les boutons de part et d'autre */
       align-items: center;
-      margin-top: 20px;
-      padding: 0 20px; /* Ajoute un espacement horizontal */
-      gap: 40px; /* Ajoute un espacement entre les boutons */
+      margin-top: 10px; /* Further reduced margin */
+      padding: 0 5px; /* Further reduced padding */
+      gap: 10px; /* Further reduced gap */
     }
 
     .links a {
@@ -108,6 +109,39 @@
       justify-content: center;
     }
 
+    .banner {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .banner-description {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: white;
+      font-style: italic;
+    }
+
+    .banner a {
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      color: white;
+      background-color: #0a7d3e;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .banner a:hover {
+      background-color: #086c35;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
     @media (max-width: 600px) {
       .main-title {
         font-size: 2rem;
@@ -123,20 +157,24 @@
         margin-top: 10px;
       }
       .links {
-        flex-direction: column; /* Affiche les liens en colonne */
-        align-items: center; /* Centre les liens dans la colonne */
+        flex-direction: column;
+        align-items: center; 
       }
       .links a {
-        width: 100%; /* Les liens prennent toute la largeur */
-        text-align: center; /* Centre le texte des liens */
-        font-size: 0.8rem; /* Réduction de la taille du texte */
-        padding: 8px 15px; /* Réduction de la taille des boutons */
+        width: 100%; 
+        text-align: center; 
+        font-size: 0.8rem; 
+        padding: 8px 15px; 
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+        background-color: #0a7d3e; /* Changé pour vert */
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       }
 
       .links a:hover {
-        background-color: rgba(255, 255, 255, 0.3); /* Fond plus visible au survol */
+        background-color: #086c35; /* Vert plus foncé au survol */
+        transform: scale(1.02);
       }
     }
 
@@ -175,6 +213,14 @@
         padding: 10px;
       }
     }
+
+    section {
+      padding: 20px 5px; /* Further reduced padding for all sections */
+    }
+
+    footer {
+      padding: 5px; /* r */
+    }
   </style>
 </head>
 <body>
@@ -188,9 +234,12 @@
       Sentez-vous vraiment vous-même, ici pas de filtre de faux bonheurs, pas de concurrence, ici : vous avez le droit d'être triste, anxieux, dépressif...
     </div>
     <div class="links">
-      <!-- Boutons repositionnés et corrigés -->
       <a href="./soutien.html" class="support-button">Besoin de soutien?</a>
       <a href="./contact.html" class="contact-button">Contactez-nous</a>
+    </div>
+    <div class="banner">
+      <div class="banner-description">Visitez notre forum de soutien</div>
+      <a href="./forum.html">visitez maintenant</a>
     </div>
   </section>
 
@@ -220,11 +269,6 @@
     </div>
   </section>
   
-  <section style="background-image: url('./images/bkground%2001.jpg'); background-size: cover; background-position: center; padding: 50px 20px; text-align: center; color: white; height: 300px;">
-    <p style="font-size: 1.2rem; margin-bottom: 20px;">découvrez notre forum de soutien</p>
-    <a href="./forum.html" style="padding: 15px 30px; font-size: 1rem; color: white; background-color: #0a7d3e; border-radius: 5px; text-decoration: none; transition: background-color 0.3s; margin-top: 10px; display: inline-block;">visitez maintenant</a>
-  </section>
-
   <script>
     let missedMessages = 0;
     try {
@@ -254,7 +298,7 @@
     }
   </script>
 </body>
-<footer style="background-color: #fcfcfc; color:#0a7d3e; text-align: center; padding: 20px; font-family: 'Playfair Display', serif;">
+<footer style="background-color: #fcfcfc; color:#0a7d3e; text-align: center; padding: 5px; font-family: 'Playfair Display', serif;">
   <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
     <p style="margin: 0; font-size: 1rem;">© 2025 BLACK HEART - Créé par [gibrilMD]</p>
   </div>
